@@ -6,17 +6,17 @@
 ## Parsing YT take out file using AWK
 
 ```fish
-``awk -F',' '
+awk -F',' '
 BEGIN { print "[" }
 NR > 1 && !seen[$2]++ {
     if (n++) print ","
     printf "  {\"url\":\"%s\"}", $2
 }
 END { print "\n]" }
-' subscriptions.csv > subscriptions.json `
+' subscriptions.csv > subscriptions.json
 ```
 
-## Opening ursl using jq from parsed json
+## Opening urls using jq from parsed json
 
 ```fish
 jq -r '.[].url' subscriptions.json | while read -l url
